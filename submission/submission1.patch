@@ -1,0 +1,46 @@
+From 5112d01373b7670eba866a11102019c8c9afcb18 Mon Sep 17 00:00:00 2001
+From: Abdulazeez Jimoh <abdulazeezojimoh@gmail.com>
+Date: Thu, 20 Jan 2022 16:32:16 +0100
+Subject: [PATCH] Add more attributes after loading table element
+
+---
+ src/Graph.tsx | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/src/Graph.tsx b/src/Graph.tsx
+index e38dd07..245fbc7 100644
+--- a/src/Graph.tsx
++++ b/src/Graph.tsx
+@@ -35,16 +35,6 @@ class Graph extends Component<IProps, {}> {
+     // Get element to attach the table from the DOM.
+     // make the definition of the `const elem` simpler,
+     const elem = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement;
+-    // add more attributes to the element
+-    elem.setAttribute('view', 'y_line');
+-    elem.setAttribute('column-pivots', '["stock"]');
+-    elem.setAttribute('row-pivots', '["timestamp"]');
+-    elem.setAttribute('columns', '["top_ask_price"]');
+-    elem.setAttribute('aggregates', `
+-      {"stock":"distinct count",
+-      "top_ask_price":"avg",
+-      "top_bid_price":"avg",
+-      "timestamp":"distinct count"}`);
+ 
+     const schema = {
+       stock: 'string',
+@@ -61,6 +51,12 @@ class Graph extends Component<IProps, {}> {
+ 
+       // Add more Perspective configurations here.
+       elem.load(this.table);
++      // add more attributes to the element
++      elem.setAttribute('view', 'y_line');
++      elem.setAttribute('column-pivots', '["stock"]');
++      elem.setAttribute('row-pivots', '["timestamp"]');
++      elem.setAttribute('columns', '["top_ask_price"]');
++      elem.setAttribute('aggregates', '{"stock":"distinct count","top_ask_price":"avg","top_bid_price":"avg","timestamp":"distinct count"}');
+     }
+   }
+ 
+-- 
+2.25.1
+
